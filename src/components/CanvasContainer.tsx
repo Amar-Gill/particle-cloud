@@ -3,7 +3,7 @@ import ParticleCloud from "./ParticleCloud";
 
 export default function CanvasContainer() {
   return (
-    <Canvas camera={{ position: [30, 30, 30] }}>
+    <Canvas camera={{ position: [15, 30, 30] }}>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <ParticleCloud />

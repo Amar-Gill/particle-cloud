@@ -36,13 +36,13 @@ export default function ParticleCloud() {
       radius: {
         value: 13,
         min: 1,
-        max: 20,
+        max: 100,
         step: 0.1,
       },
       tube: {
         value: 1.7,
         min: 1,
-        max: 20,
+        max: 100,
         step: 0.1,
       },
       tubularSegments: {
@@ -60,13 +60,13 @@ export default function ParticleCloud() {
       p: {
         value: 5,
         min: 1,
-        max: 8,
+        max: 12,
         step: 1,
       },
       q: {
         value: 4,
         min: 1,
-        max: 8,
+        max: 12,
         step: 1,
       },
       rotate: false,
