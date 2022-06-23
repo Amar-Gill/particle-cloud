@@ -1,4 +1,5 @@
 import { AdditiveBlending, Texture } from "three";
+import { useControls } from "leva";
 
 function generateSprite() {
   const canvas = document.createElement("canvas");
@@ -28,6 +29,45 @@ function generateSprite() {
 }
 
 export default function ParticleCloud() {
+  const { radius, tube, tubularSegments, radialSegments, p, q } = useControls({
+    radius: {
+      value: 13,
+      min: 1,
+      max: 20,
+      step: 0.1,
+    },
+    tube: {
+      value: 1.7,
+      min: 1,
+      max: 20,
+      step: 0.1,
+    },
+    tubularSegments: {
+      value: 156,
+      min: 8,
+      max: 256,
+      step: 1,
+    },
+    radialSegments: {
+      value: 12,
+      min: 4,
+      max: 32,
+      step: 1,
+    },
+    p: {
+      value: 5,
+      min: 1,
+      max: 8,
+      step: 1,
+    },
+    q: {
+      value: 4,
+      min: 1,
+      max: 8,
+      step: 1,
+    },
+  });
+
   return (
     <points>
       <pointsMaterial
@@ -38,8 +78,9 @@ export default function ParticleCloud() {
         depthWrite={false}
         map={generateSprite()}
       />
-      {/* static geometry. will add controls logic later. */}
-      <torusKnotGeometry args={[13, 1.7, 156, 12, 5, 4]} />
+      <torusKnotGeometry
+        args={[radius, tube, tubularSegments, radialSegments, p, q]}
+      />
     </points>
   );
 }
