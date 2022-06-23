@@ -1,5 +1,7 @@
-import { AdditiveBlending, Texture } from "three";
+import { AdditiveBlending, Points, Texture } from "three";
 import { useControls } from "leva";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 
 function generateSprite() {
   const canvas = document.createElement("canvas");
@@ -29,47 +31,57 @@ function generateSprite() {
 }
 
 export default function ParticleCloud() {
-  const { radius, tube, tubularSegments, radialSegments, p, q } = useControls({
-    radius: {
-      value: 13,
-      min: 1,
-      max: 20,
-      step: 0.1,
-    },
-    tube: {
-      value: 1.7,
-      min: 1,
-      max: 20,
-      step: 0.1,
-    },
-    tubularSegments: {
-      value: 156,
-      min: 8,
-      max: 256,
-      step: 1,
-    },
-    radialSegments: {
-      value: 12,
-      min: 4,
-      max: 32,
-      step: 1,
-    },
-    p: {
-      value: 5,
-      min: 1,
-      max: 8,
-      step: 1,
-    },
-    q: {
-      value: 4,
-      min: 1,
-      max: 8,
-      step: 1,
-    },
+  const { radius, tube, tubularSegments, radialSegments, p, q, rotate } =
+    useControls({
+      radius: {
+        value: 13,
+        min: 1,
+        max: 20,
+        step: 0.1,
+      },
+      tube: {
+        value: 1.7,
+        min: 1,
+        max: 20,
+        step: 0.1,
+      },
+      tubularSegments: {
+        value: 156,
+        min: 8,
+        max: 256,
+        step: 1,
+      },
+      radialSegments: {
+        value: 12,
+        min: 4,
+        max: 32,
+        step: 1,
+      },
+      p: {
+        value: 5,
+        min: 1,
+        max: 8,
+        step: 1,
+      },
+      q: {
+        value: 4,
+        min: 1,
+        max: 8,
+        step: 1,
+      },
+      rotate: false,
+    });
+
+  const points = useRef<Points>(null!);
+
+  useFrame(() => {
+    if (rotate) {
+      points.current.rotation.y += 0.01;
+    }
   });
 
   return (
-    <points>
+    <points ref={points}>
       <pointsMaterial
         color="0xffffff"
         size={3}
