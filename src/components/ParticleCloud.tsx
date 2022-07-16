@@ -72,7 +72,7 @@ export default function ParticleCloud() {
         max: 12,
         step: 1,
       },
-      rotate: false,
+      rotate: true,
     });
 
   const points = useRef<Points>(null!);
